@@ -1,4 +1,5 @@
 mpi:
   - mpich # [linux]
   - openmpi # [unix]
+  - msmpi # [win]
   - nompi

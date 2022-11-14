@@ -1,6 +1,6 @@
 {% set name = "libvdwxc" %}
 {% set version = '0.4.0' %}
-{% set build_number = 1 %}
+{% set build_number = 2 %}
 
 {% if mpi != 'nompi' %}
   {% set mpi_prefix = "mpi_" + mpi %}
@@ -17,7 +17,6 @@ source:
   sha256: 3524feb5bb2be86b4688f71653502146b181e66f3f75b8bdaf23dd1ae4a56b33
 
 build:
-  skip: True  # [not unix]
   number: {{ build_number }}
   string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build_number }}"
   run_exports:
@@ -32,9 +31,12 @@ requirements:
     - {{ compiler('fortran') }}
     - {{ mpi }}        # [mpi == 'openmpi' and build_platform != target_platform]
     - make  # [unix]
+    - autotools_clang_conda  # [win]
+    - llvm-openmp  # [win]
   host:
     - {{ mpi }}  # [mpi != 'nompi']
-    - fftw * {{ mpi_prefix }}_*
+    - fftw * {{ mpi_prefix }}_*  # [unix]
+    - fftw * nompi_*  # [win]
 
 
 test:
