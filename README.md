@@ -3,7 +3,7 @@ About libvdwxc-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/libvdwxc-feedstock/blob/main/LICENSE.txt)
 
-Home: https://libvdwxc.org
+Home: https://libvdwxc.materialsmodeling.org
 
 Package license: GPL-3.0-or-later
 
@@ -11,7 +11,7 @@ Summary: Portable C library of density functionals with van der Waals interactio
 
 Development: https://gitlab.com/libvdwxc/libvdwxc
 
-Documentation: https://libvdwxc.org/index.html
+Documentation: https://libvdwxc.materialsmodeling.org
 
 Current build status
 ====================
@@ -236,5 +236,6 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
+* [@askhl](https://github.com/askhl/)
 * [@gdonval](https://github.com/gdonval/)
 
