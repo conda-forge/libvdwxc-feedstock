@@ -50,9 +50,9 @@ test:
 
     
 about:
-  home: https://libvdwxc.org
+  home: https://libvdwxc.materialsmodeling.org
   dev_url: https://gitlab.com/libvdwxc/libvdwxc
-  doc_url: https://libvdwxc.org/index.html
+  doc_url: https://libvdwxc.materialsmodeling.org
   license: GPL-3.0-or-later
   license_family: Other
   summary: Portable C library of density functionals with van der Waals interactions for density functional theory
@@ -61,3 +61,4 @@ about:
 extra:
   recipe-maintainers:
     - gdonval
+    - askhl
