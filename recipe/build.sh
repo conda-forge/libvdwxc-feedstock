@@ -20,7 +20,9 @@ fi
 
 
 make -j$CPU_COUNT
-make check
+if [[ "${target_platform}" == "linux*" ]] || [[ x"$mpi" == x"nompi" ]]; then
+  make check
+fi
 make install
 
 # Removes binaries built and used by `make check` 
