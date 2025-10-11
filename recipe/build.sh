@@ -1,4 +1,6 @@
 #!/bin/sh
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./config/gnu
 
 mkdir build && cd build
 
@@ -9,6 +11,10 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
   export OMPI_CXX=$CXX
   export OMPI_FC=$FC
   export OPAL_PREFIX=$PREFIX
+fi
+
+if [[ "$target_platform" == osx-* ]]; then
+  export SDKROOT=$(xcrun --show-sdk-path)
 fi
 
 if [[ x"$mpi" != x"nompi" ]]; then
