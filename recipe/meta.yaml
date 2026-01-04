@@ -41,7 +41,7 @@ requirements:
 
 test:
   requires:
-    - python >= 3
+    - python >=3
   commands:
     - test -f ${PREFIX}/include/vdwxc.h || exit 1   # [unix]
     - test -f ${PREFIX}/include/vdwxcfort.f90 || exit 1  # [unix]
