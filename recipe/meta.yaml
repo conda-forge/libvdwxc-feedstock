@@ -15,6 +15,8 @@ package:
 source:
   url: https://launchpad.net/{{ name }}/stable/{{ version }}/+download/{{ name }}-{{ version }}.tar.gz
   sha256: 29fb70efd58aff51524d2172a87e8f88e760b696b0ddb9aa5878432bdffa3c2f
+  patches:
+    - mpi.patch
 
 build:
   skip: True  # [not unix]
