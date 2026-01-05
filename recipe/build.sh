@@ -28,7 +28,7 @@ if [[ x"$mpi" != x"nompi" ]]; then
   export FC=mpifort
   configure_args+=(--with-mpi=$PREFIX)
 fi
-../configure ${configure_args[@]}
+../configure ${configure_args[@]} || (cat config.log && false)
 make -j$CPU_COUNT
 if [[ "${target_platform}" == "linux*" ]] || [[ x"$mpi" == x"nompi" ]]; then
   make check
