@@ -32,7 +32,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
     - {{ compiler('fortran') }}
-    - {{ mpi }}        # [mpi == 'openmpi' and build_platform != target_platform]
+    - {{ mpi }}  # [mpi != 'nompi']
     - make  # [unix]
   host:
     - {{ mpi }}  # [mpi != 'nompi']
