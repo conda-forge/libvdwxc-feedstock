@@ -14,14 +14,21 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
 fi
 
 export CFLAGS="$CFLAGS -O3 -ffast-math -funroll-loops"
+export FCFLAGS=$CFLAGS
+
+configure_args=(
+  "--prefix=${PREFIX}"
+  "--build=${BUILD}"
+  "--host=${HOST}"
+  "--disable-static"
+  "--with-fftw3=${PREFIX}"
+)
 if [[ x"$mpi" != x"nompi" ]]; then
-  ../configure --prefix=$PREFIX --disable-static CC=mpicc FC=mpifort CFLAGS=$CFLAGS FCFLAGS=$CFLAGS --with-fftw3=$PREFIX --with-mpi=$PREFIX
-else
-  ../configure --prefix=$PREFIX --disable-static CC=$CC FC=$FC CFLAGS=$CFLAGS FCFLAGS=$CFLAGS --with-fftw3=$PREFIX
+  export CC=mpicc
+  export FC=mpifort
+  configure_args+=(--with-mpi=$PREFIX)
 fi
-
-
-
+../configure ${configure_args[@]}
 make -j$CPU_COUNT
 if [[ "${target_platform}" == "linux*" ]] || [[ x"$mpi" == x"nompi" ]]; then
   make check
