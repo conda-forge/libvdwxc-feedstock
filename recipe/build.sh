@@ -13,10 +13,11 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
   export OPAL_PREFIX=$PREFIX
 fi
 
+export CFLAGS="$CFLAGS -O3 -ffast-math -funroll-loops"
 if [[ x"$mpi" != x"nompi" ]]; then
-  ../configure --prefix=$PREFIX --disable-static CC=mpicc FC=mpifort CFLAGS="$CFLAGS -O3 -ffast-math -funroll-loops" FCFLAGS="$CFLAGS -O3 -ffast-math -funroll-loops" --with-fftw3=$PREFIX --with-mpi=$PREFIX
+  ../configure --prefix=$PREFIX --disable-static CC=mpicc FC=mpifort CFLAGS=$CFLAGS FCFLAGS=$CFLAGS --with-fftw3=$PREFIX --with-mpi=$PREFIX
 else
-  ../configure --prefix=$PREFIX --disable-static CC=$CC FC=$FC CFLAGS="$CFLAGS -O3 -ffast-math -funroll-loops" FCFLAGS="$CFLAGS -O3 -ffast-math -funroll-loops" --with-fftw3=$PREFIX
+  ../configure --prefix=$PREFIX --disable-static CC=$CC FC=$FC CFLAGS=$CFLAGS FCFLAGS=$CFLAGS --with-fftw3=$PREFIX
 fi
 
 
