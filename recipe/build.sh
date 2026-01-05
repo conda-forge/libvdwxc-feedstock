@@ -24,8 +24,13 @@ configure_args=(
   "--with-fftw3=${PREFIX}"
 )
 if [[ x"$mpi" != x"nompi" ]]; then
-  export CC=mpicc
-  export FC=mpifort
+  if [[ "${target_platform}" == osx-arm64 ]]; then
+    export CC=$BUILD_PREFIX/bin/mpicc
+    export FC=$BUILD_PREFIX/bin/mpifort
+  else
+    export CC=mpicc
+    export FC=mpifort
+  fi
   configure_args+=(--with-mpi=$PREFIX)
 fi
 ../configure ${configure_args[@]} || (cat config.log && false)
