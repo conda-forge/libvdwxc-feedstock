@@ -4,15 +4,6 @@ cp $BUILD_PREFIX/share/gnuconfig/config.* ./config/gnu
 
 mkdir build && cd build
 
-if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
-  # This is only used by open-mpi's mpicc
-  # ignored in other cases
-  export OMPI_CC=$CC
-  export OMPI_CXX=$CXX
-  export OMPI_FC=$FC
-  export OPAL_PREFIX=$PREFIX
-fi
-
 export CFLAGS="$CFLAGS -O3 -ffast-math -funroll-loops"
 export FCFLAGS=$CFLAGS
 
