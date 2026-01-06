@@ -26,7 +26,7 @@ if [[ x"$mpi" != x"nompi" ]]; then
 fi
 ../configure ${configure_args[@]} || (cat config.log && false)
 make -j$CPU_COUNT
-if [[ "${target_platform}" == "linux*" ]] || [[ x"$mpi" == x"nompi" ]]; then
+if [[ x"$mpi" != x"mpich" ]]; then
   make check
 fi
 make install
