@@ -4,16 +4,6 @@ cp $BUILD_PREFIX/share/gnuconfig/config.* ./config/gnu
 
 mkdir build && cd build
 
-export CFLAGS="$CFLAGS -O3 -ffast-math -funroll-loops"
-export FCFLAGS=$CFLAGS
-
-configure_args=(
-  "--prefix=${PREFIX}"
-  "--build=${BUILD}"
-  "--host=${HOST}"
-  "--disable-static"
-  "--with-fftw3=${PREFIX}"
-)
 if [[ x"$mpi" != x"nompi" ]]; then
   if [[ "${target_platform}" == osx-arm64 ]]; then
     export CC=$BUILD_PREFIX/bin/mpicc
@@ -22,9 +12,23 @@ if [[ x"$mpi" != x"nompi" ]]; then
     export CC=mpicc
     export FC=mpifort
   fi
+fi
+configure_args=(
+  "--prefix=${PREFIX}"
+  "--build=${BUILD}"
+  "--host=${HOST}"
+  "--disable-static"
+  "--with-fftw3=${PREFIX}"
+)
+if [[ x"$mpi" != x"nompi" ]]; then
   configure_args+=(--with-mpi=$PREFIX)
 fi
-../configure ${configure_args[@]} || (cat config.log && false)
+../configure \
+  CC=$CC \
+  FC=$FC \
+  CFLAGS="$CFLAGS -O3 -ffast-math -funroll-loops" \
+  LCFLAGS="$CFLAGS -O3 -ffast-math -funroll-loops" \
+  ${configure_args[@]} || (cat config.log && false)
 make -j$CPU_COUNT
 if [[ x"$mpi" != x"mpich" ]]; then
   make check
