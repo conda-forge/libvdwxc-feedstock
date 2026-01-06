@@ -1,6 +1,6 @@
 {% set name = "libvdwxc" %}
 {% set version = '0.5.0' %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 {% if mpi != 'nompi' %}
   {% set mpi_prefix = "mpi_" + mpi %}
@@ -15,6 +15,8 @@ package:
 source:
   url: https://launchpad.net/{{ name }}/stable/{{ version }}/+download/{{ name }}-{{ version }}.tar.gz
   sha256: 29fb70efd58aff51524d2172a87e8f88e760b696b0ddb9aa5878432bdffa3c2f
+  patches:
+    - mpi.patch
 
 build:
   skip: True  # [not unix]
@@ -28,10 +30,11 @@ build:
  
 requirements:
   build:
+    - gnuconfig  # [unix]
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
     - {{ compiler('fortran') }}
-    - {{ mpi }}        # [mpi == 'openmpi' and build_platform != target_platform]
+    - {{ mpi }}  # [mpi != 'nompi']
     - make  # [unix]
   host:
     - {{ mpi }}  # [mpi != 'nompi']
@@ -40,7 +43,7 @@ requirements:
 
 test:
   requires:
-    - python >= 3
+    - python >=3
   commands:
     - test -f ${PREFIX}/include/vdwxc.h || exit 1   # [unix]
     - test -f ${PREFIX}/include/vdwxcfort.f90 || exit 1  # [unix]
