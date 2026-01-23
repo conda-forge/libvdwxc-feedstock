@@ -30,9 +30,7 @@ fi
   LCFLAGS="$CFLAGS -O3 -ffast-math -funroll-loops" \
   ${configure_args[@]} || (cat config.log && false)
 make -j$CPU_COUNT
-if [[ x"$mpi" != x"mpich" ]]; then
-  make check
-fi
+make check
 make install
 
 # Removes binaries built and used by `make check` 
