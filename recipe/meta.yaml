@@ -1,6 +1,6 @@
 {% set name = "libvdwxc" %}
 {% set version = '0.5.0' %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 {% if mpi != 'nompi' %}
   {% set mpi_prefix = "mpi_" + mpi %}
