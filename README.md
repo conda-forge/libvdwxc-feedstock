@@ -233,4 +233,5 @@ Feedstock Maintainers
 
 * [@askhl](https://github.com/askhl/)
 * [@gdonval](https://github.com/gdonval/)
+* [@yuzie007](https://github.com/yuzie007/)
 
