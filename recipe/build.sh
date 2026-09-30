@@ -1,16 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 # Get an updated config.sub and config.guess
 cp $BUILD_PREFIX/share/gnuconfig/config.* ./config/gnu
 
 mkdir build && cd build
 
 if [[ x"$mpi" != x"nompi" ]]; then
-  if [[ "${target_platform}" == osx-arm64 ]]; then
-    export CC=$BUILD_PREFIX/bin/mpicc
-    export FC=$BUILD_PREFIX/bin/mpifort
-  elif [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == "1" ]]; then
-    export CC=$PREFIX/bin/mpicc
-    export FC=$PREFIX/bin/mpifort
+  if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == "1" ]]; then
+    if [[ "$mpi" == "openmpi" ]]; then
+      export OPAL_PREFIX="$PREFIX"
+      export CC="$BUILD_PREFIX/bin/mpicc"
+      export FC="$BUILD_PREFIX/bin/mpifort"
+    else  # mpich
+      export CC="$PREFIX/bin/mpicc"
+      export FC="$PREFIX/bin/mpifort"
+    fi
   else
     export CC=mpicc
     export FC=mpifort
