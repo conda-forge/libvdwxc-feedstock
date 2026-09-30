@@ -1,0 +1,11 @@
+--- a/configure
++++ b/configure
+@@ -21917,7 +21917,7 @@
+ 
+       int *argc;
+       char **argv;
+-      MPI_Init(argc, argv);
++      MPI_Init(argc, &argv);
+ 
+   ;
+   return 0;
