@@ -8,6 +8,16 @@ jobs:
     vmImage: $(VMIMAGE)
   strategy:
     matrix:
+      osx_64_mpimpich:
+        CONFIG: osx_64_mpimpich
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        free_disk_space: skip
+        pagefile_size: 0
+        resize_partitions: false
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
       osx_64_mpinompi:
         CONFIG: osx_64_mpinompi
         UPLOAD_PACKAGES: 'True'
@@ -20,6 +30,16 @@ jobs:
         tools_install_dir: ~/miniforge3
       osx_64_mpiopenmpi:
         CONFIG: osx_64_mpiopenmpi
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        free_disk_space: skip
+        pagefile_size: 0
+        resize_partitions: false
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_mpimpich:
+        CONFIG: osx_arm64_mpimpich
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         build_workspace_dir: ~/miniforge3/conda-bld
